@@ -1,0 +1,55 @@
+#include <Arduino.h>
+#include <toneAC.h>
+
+const int redPin = 9;
+const int yellowPin = 10;
+const int greenPin = 11;
+const int buzzerPin = 12;
+
+void beep(int freq, int duration) {
+  toneAC(buzzerPin, freq, duration);
+  delay(duration);
+  noToneAC(buzzerPin);
+}
+
+void greenLight() {
+  digitalWrite(greenPin, HIGH);
+  digitalWrite(yellowPin, LOW);
+  digitalWrite(redPin, LOW);
+  beep(2000, 300);
+  beep(2000, 300);
+  beep(2000, 300);
+}
+
+void yellowLight() {
+  digitalWrite(greenPin, LOW);
+  digitalWrite(yellowPin, HIGH);
+  digitalWrite(redPin, LOW);
+  beep(2000, 300);
+  beep(2000, 300);
+}
+
+void redLight() {
+  digitalWrite(greenPin, LOW);
+  digitalWrite(yellowPin, LOW);
+  digitalWrite(redPin, HIGH);
+  beep(2000, 1000);
+}
+
+void setup() {
+  pinMode(redPin, OUTPUT);
+  pinMode(yellowPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(buzzerPin, OUTPUT);
+}
+
+void loop() {
+  greenLight();
+  delay(5000);
+  yellowLight();
+  delay(2000);
+  redLight();
+  delay(5000);
+  yellowLight();
+  delay(2000);
+}
